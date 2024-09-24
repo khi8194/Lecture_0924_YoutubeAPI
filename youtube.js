@@ -15,7 +15,7 @@ www.abc.com // 기본 요청 URL
 요청사항이 여러개일때는 &로 구분
 */
 
-console.log("youtube");
+// console.log("youtube");
 const api_key = "AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4";
 const pid = "PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh";
 const num = 10;
@@ -74,4 +74,4 @@ fetch(url)
 //위에 처럼 비동기적으로 발생하는 코드의 흐름을 강제적으로 동기적 처리
 //코드 작성 순거대로 순차적으로 실행되게 만드는 작업 (동기화)
 const titles = document.querySelector("article h2");
-console.log(titles);
+console.log(titles); //null값
