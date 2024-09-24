@@ -7,5 +7,22 @@ fetch('요청URL').then(data-> data.json()).then(json=>{
 });
 */
 
+/*
+QueryString : 기본 요청 URL 뒤에 문자열 형태로 옵션값을 달아서 서버에 요청하는 형태 
+https://www.abc.com?pwd=1234&name=abc;
+www.abc.com // 기본 요청 URL
+?뒤에 있는 key=value값 문자열 형태로 지정한 추가 요청사항
+요청사항이 여러개일때는 &로 구분
+*/
+
 console.log("youtube");
 const api_key = "AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4";
+const pid = "PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh";
+
+const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}`;
+
+fetch(url)
+	.then((data) => data.json())
+	.then((json) /*parsing된 데이터를 받는 위치*/ => {
+		console.log(json);
+	});
