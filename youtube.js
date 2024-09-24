@@ -83,7 +83,12 @@ document.body.addEventListener("click", function (e) {
 
 	//body 전체에 이벤트를 연결한 뒤 이벤트를 발생한 실제대상을 조건문으로 분기처리해서
 	//조건에 부합될때에만 원하는 구문 연결(이처럼 번거로운 작업을 처리하지 않기 위해서 리액트같은 프레임웍, 라이브러리 //를 사용)
-	if ((e.target.className = "vidTitle")) {
+	if (e.target.className === "vidTitle") {
 		console.log("you clicked VidTitle");
+		//동적으로 article로 모달창 생성
+		//해당 모달창을 절대 innerHTML로 생성 불가
+		//innerHTML은 기존의 선택자 안쪽의 요소들을 다 지우고 새로운 요소들로 바꿔치기 하는 개념
+		//지금처럼 기존 목록요소를 모달만 추가하고자 할때는 적합하지 않음
+		//해결방법 : 부모선택자 .append(동적 생성요소:돔객체)
 	}
 });
