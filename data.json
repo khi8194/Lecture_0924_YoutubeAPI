@@ -1,0 +1,16 @@
+{
+  "member": [
+    {
+      "name": "David",
+      "position": "CEO"
+    },
+    {
+      "name": "Amily",
+      "position": "DESIGNER"
+    },
+    {
+      "name": "Michael",
+      "position": "DEVELOPER"
+    }
+  ]
+}
