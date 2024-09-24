@@ -102,5 +102,6 @@ document.body.addEventListener("click", function (e) {
 		document.body.append(asideEl);
 		//body에 aside를 추가함 (더 많이 사용) : 기존요소 유지하면서 뒤쪽에 추가
 		// document.body.prepend(asideEl);
+		//
 	}
 });
