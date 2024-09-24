@@ -29,8 +29,8 @@ fetch(url)
 	.then((data) => data.json())
 	.then((json) => {
 		const vidsData = json.items;
-		// console.log(json);
-		console.log(vidsData);
+		// // console.log(json);
+		// console.log(vidsData);
 		let tags = "";
 
 		vidsData.forEach((data) => {
@@ -48,7 +48,7 @@ fetch(url)
 
 			tags += `
         <article>
-          <h2>${title}</h2>
+          <h2 class='vidTitle'>${title}</h2>
 
           <div class='txt'>
             <p>${desc}</p>
@@ -62,16 +62,28 @@ fetch(url)
         </article>
       `;
 		});
-		console.log(tags);
+		// console.log(tags);
 		frame.innerHTML = tags;
 	});
 
-//위쪽의 fetch 구문의 아래쪽의 동적으로 생성한 DOM요소를 변수 담는 구문은 동시에 실행됨
-//비동기적으로 동작함
-//코드의 작성순서대로 동작하는게 아니라 동시다발적으로 실행되기 때문에
-//코드흐름의 어그러지는 현상
+// 자바스크립트로 동적으로 생성된 요소는 일반적인 방법으로는 이벤트 연결이 불가
+// 동적인 요소가 만들어지는 위치가 fetch함수의 then구문안쪽인데 그 밖에서는 동적인 요소 선택 불가
+// 제일 간단한 해결 방법 : 동적생성 요소 찾는 구문을 돔을 생성하는 코드 블록 안쪽에서 호출
+// 위의 방법의 단점 : fetch 함수 코드블록 안족에 또 다시 복잡한 이벤트 연결로직을 작성해야 되기 때문에 코드의 복잡도 증가
+// 기능별로 코드 분리가 불가능
+// 위와 같은 이유로 부득이하게 동적인 요소의 이벤트 연결을 fetch함수 밖에서 연결하는 경우가 많음
+// 이벤트 위임: 지금 당장은 없는 DOM요소에 이벤트를 전달하기 위해서 항상 존재하는 요소에 이벤트를 맡겨서
+// 추후 동적요소가 생성완료되면 그때 이벤트를 대신 전달해주는 방식
 
-//위에 처럼 비동기적으로 발생하는 코드의 흐름을 강제적으로 동기적 처리
-//코드 작성 순거대로 순차적으로 실행되게 만드는 작업 (동기화)
-const titles = document.querySelector("article h2");
-console.log(titles); //null값
+// 이벤트 위임: 항상 존재하는 body요소에 일단은 이벤트를 맡겼다가 동적요소가 생성완료되면 body가 대신 이벤트 전달
+
+document.body.addEventListener("click", function (e) {
+	// console.log(e.target);
+	console.dir(e.target);
+
+	//body 전체에 이벤트를 연결한 뒤 이벤트를 발생한 실제대상을 조건문으로 분기처리해서
+	//조건에 부합될때에만 원하는 구문 연결(이처럼 번거로운 작업을 처리하지 않기 위해서 리액트같은 프레임웍, 라이브러리 //를 사용)
+	if ((e.target.className = "vidTitle")) {
+		console.log("you clicked VidTitle");
+	}
+});
