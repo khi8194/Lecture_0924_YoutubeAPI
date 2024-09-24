@@ -18,11 +18,21 @@ www.abc.com // 기본 요청 URL
 console.log("youtube");
 const api_key = "AIzaSyCKLA8E45lLrWn_7MlJL692LpwsZ9mwa_4";
 const pid = "PL7dKBcBdt1leSwaAYMfi9B9GkbLK_A_oh";
+const num = 10;
 
-const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}`;
+const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${pid}&key=${api_key}&maxResults=${num}`;
 
 fetch(url)
-	.then((data) => data.json())
+	.then((data) => data.json()) //문자열의 데이터를 객체나 배열형태로 변환 (parsing)
 	.then((json) /*parsing된 데이터를 받는 위치*/ => {
+		//parsing 완료된 데이터를 json 파라미터명으로 받아서
+		//해당 코드블록 안쪽에서 데이터 활용
 		console.log(json);
+		//자주쓰는 데이터값
+		//snippet
+		//-title: 영상의 제목
+		//-description : 영상의 본문
+		//-publishedAt : 영상 업로드 날짜
+		//-thumbnails.standard.url : 썸네일주소
+		//-resourceId.videoId: 추후 영상호출시 필요한 정보값
 	});
